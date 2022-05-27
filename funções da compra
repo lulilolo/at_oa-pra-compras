@@ -1,0 +1,24 @@
+from time import sleep
+
+# função para substituir o os('cls')
+def limpatela():
+  cont = 0
+  while cont != 8:
+    print()
+    cont += 1
+
+# função para não ter que escrever toda hora da linha 17 até a 22 
+def catalogo():
+  fruta1 = ('banana', 'maça', 'tomate', 'cereja', 'cereja negra', 'uva')
+  fruta2 = ('goiaba', 'abacaxi', 'pepino', 'batata', 'morango')
+  prefruta1 = (3.00, 2.50, 3.30, 4.80, 1.10, 1.20)
+  prefruta2 = (2.00, 3.00, 2.50, 5.00, 1.50)
+  conta = 0
+  for comida, preco in zip(fruta1, prefruta1):
+    print(f'{comida:.<12}{preco:.>9.2f}')
+    conta += 1
+    if conta == 2:
+      for comida, preco in zip(fruta2, prefruta2):
+        print(f'{comida:.<12}{preco:.>9.2f}')
+
+                     #100% completo
