@@ -1,0 +1,136 @@
+# importando minhas funções
+import funções as df
+
+# criando catálogo de frutas
+fruta1 = ('banana', 'maça', 'tomate', 'cereja', 'cereja negra', 'uva')
+fruta2 = ('goiaba', 'abacaxi', 'pepino', 'batata', 'morango')
+prefruta1 = (3.00, 2.50, 3.30, 4.80, 1.10, 1.20)
+prefruta2 = (2.00, 3.00, 2.50, 5.00, 1.50)
+conta = 0
+for comida, preco in zip(fruta1, prefruta1):
+  print(f'{comida:.<12}{preco:.>9.2f}')
+  conta += 1
+  if conta == 2:
+    for comida, preco in zip(fruta2, prefruta2):
+      print(f'{comida:.<12}{preco:.>9.2f}')
+      
+df.limpatela()
+
+# criando as escolhas
+carrinhofruta = []
+carrinhopreco = []
+while True:
+  esc = str(input('[ 1 ] adicionar comida na cestinha\n'
+                  '[ 2 ] ver produtos\n'
+                  '[ 3 ] tirar comida da cesta\n'
+                  '[ 4 ] ver minha cesta\n'
+                  '[ 5 ] pagar conta\n'
+                  'Qual você quer'
+                  ': '))
+  print()
+  
+# escolha 1
+  if esc == '1':
+    # encontrar sua fruta nas listas
+    while True:
+      comida = str(input('escolha sua fruta: '))
+      # se na lista 1
+      if comida in fruta1:
+        carrinhofruta.append(comida)
+        a = fruta1.index(comida)
+        carrinhopreco.append(prefruta1[a])
+        df.limpatela()
+        print('adicionado')
+        print()
+        df.sleep(1)
+        df.catalogo()
+        break
+      # se na lista 2
+      elif comida in fruta2:
+        carrinhofruta.append(comida)
+        b = fruta2.index(comida)
+        carrinhopreco.append(prefruta2[b])
+        df.limpatela()
+        print('adicionado')
+        print()
+        df.sleep(1)
+        df.catalogo()
+        break
+      # se não estiver nas listas
+      else:
+        df.limpatela()
+        print('comida não achada')
+        df.sleep(1)
+        print('tente escolher outra comida...')
+        df.sleep(1)
+        df.catalogo()
+
+# escolha 2
+  elif esc == '2':
+    df.catalogo()
+    print()
+
+# escolha 3
+  elif esc == '3':
+    # se carrinho estiver vazio
+    if len(carrinhofruta) == 0:
+      print('sua cestinha não tem nada...')
+      df.sleep(1)
+      df.limpatela()
+    # se carrinho com algum item
+    else:
+      # mostrar instrução e seu carrinho
+      while True:
+        print('use o ID da fruta para tirar ela da cestinha')
+        df.sleep(1)
+        c = 0
+        for item, preco in zip(carrinhofruta, carrinhopreco):
+          print(f'ID:{c} --> {item:.<12}{preco:.>9}')
+          c += 1
+        # para erros
+        try:
+          # escolhe o ID para tirar a fruta
+          deletar = int(input('Qual produto você quer tirar da cestinha ?'
+                              ': '))
+          print()
+          # vê se está dentro do escopo da lista
+          if deletar <= len(carrinhofruta):
+            del carrinhofruta[deletar]
+            del carrinhopreco[deletar]
+            print('fruta retirada da cestinha')
+            print()
+            break
+          # se não estiver no escopo
+          else:
+            print('não achamos essa comida na sua cestinha :(')
+        except ValueError:
+          print('por favor digite apenas o id da fruta que você quer tirar')
+
+# escolha 4
+  elif esc == '4':
+    # carrinho vazio
+    if len(carrinhofruta) == 0:
+      print('cestinha vazia...')
+      print()
+    # carrinho com coisas
+    else: 
+      for comida, preco in zip(carrinhofruta, carrinhopreco):
+        print(f'{comida:.<12}{preco:.>9.2f}')
+      print()
+
+# escolha 5
+  elif esc == '5':
+    break
+
+# escolha fora do escopo
+  else:
+    print('por favor, escolha uma opção de 1 a 5...')
+    print()
+
+# pagando as contas
+for comida, preco in zip(carrinhofruta, carrinhopreco):
+  print(f'{comida:.<12}{preco:.>9.2f}')
+print()
+
+
+               #70% completo 
